@@ -1,2 +1,12 @@
-# hotel_ids
-Etapa de desarrollo para ingeniería en software
+# Projecto Hotel
+#### Etapa de desarrollo para ingeniería en software
+
+#### Tecnologias utilizadas
+
+- Anaconda
+- MySQL
+- Python
+- Django
+- Git & Github
+
+#### Instrucciones
