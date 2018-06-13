@@ -3,10 +3,7 @@
 
 #### Tecnologias utilizadas
 
-- Anaconda
 - MySQL
 - Python
 - Django
 - Git & Github
-
-#### Instrucciones
