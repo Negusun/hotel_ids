@@ -15,5 +15,5 @@ class Habitacion(models.Model):
     tipo = models.CharField(max_length=1, choices=TIPOS, default=TIPOS[0][0])
     hotel = models.ForeignKey('hotel.Hotel', on_delete=models.CASCADE, null=True)
 
-    def __str__(self):
-        return self.numero
+    def __unicode__(self):
+        return str(self.numero)

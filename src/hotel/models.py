@@ -15,5 +15,5 @@ class Hotel(models.Model):
     ubicacion = models.CharField(max_length=250, default='No proporcionada')
     categoria = models.CharField(max_length=1, choices=CATEGORIAS, default=CATEGORIAS[0][0])
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre
