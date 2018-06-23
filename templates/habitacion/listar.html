@@ -3,29 +3,41 @@
 
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
-  {% for habitacion in habitaciones %}
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title text-capitalize">
-        {{habitacion.hotel.nombre}} {{habitacion.hotel.categoria}} Estrella
-      </h5>
-      <h6 class="card-subtitle mb-2 text-muted">
-        Habitacion: {{habitacion.numero}}
-      </h6>
-      <p class="card-text">
-        Ubicación: <span class="text-capitalize">
-          {{habitacion.hotel.ubicacion}}, {{habitacion.hotel.ciudad}}
-        </span><br>
-        Tipo: <span class="text-capitalize">
-          {{habitacion.tipo_habitacion}}
-        </span>
-      </p>
+  <div class="row">
+    <div class="col-3">
+      Seccion destinada a filtros de busqueda        
     </div>
-    <div class="card-footer text-muted">
-      $ {{habitacion.precio}}
-      {{habitacion.capacidad}}
-      <a href="#" class="btn btn-info btn-sm float-right">Reservar</a>
+    <div class="col-9">
+      <div class="row">
+        {% for habitacion in habitaciones %}
+          <div class="col-4">
+            <div class="card mb-3">
+              <img class="card-img-top" src="https://media.staticontent.com/media/pictures/10436860-a22a-48d5-8fb0-05d195f73c68/323x250" alt="">
+              <div class="card-body">
+                <h5 class="card-title text-capitalize">
+                  {{habitacion.hotel.nombre}} <i class="fas fa-star star">{{habitacion.hotel.categoria}}</i>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  Habitacion: {{habitacion.numero}}
+                </h6>
+                <p class="card-text">
+                  Tipo: <span class="text-capitalize">
+                    {{habitacion.tipo_habitacion}}
+                  </span><br>
+                  <i class="fas fa-map-marked"></i> <span class="text-capitalize">
+                    {{habitacion.hotel.ubicacion}}, {{habitacion.hotel.ciudad}}
+                  </span>
+                </p>
+              </div>
+              <div class="card-footer text-muted">
+                <i class="fas fa-dollar-sign"></i> {{habitacion.precio}}
+                <i class="fas fa-users"></i> {{habitacion.capacidad}}
+                <a href="#" class="btn btn-info btn-sm float-right">Reservar</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
-  {% endfor %}
 {% endblock %}

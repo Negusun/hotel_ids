@@ -1,0 +1,9 @@
+.star {
+  color: #ffe066;
+}
+
+.card:hover {
+  -webkit-box-shadow: 7px 7px 30px -6px rgba(0,0,0,0.43);
+  -moz-box-shadow: 7px 7px 30px -6px rgba(0,0,0,0.43);
+  box-shadow: 7px 7px 30px -6px rgba(0,0,0,0.43);
+}

@@ -41,11 +41,11 @@ class TipoHabitacion(models.Model):
 
 #habitacion model
 class Habitacion(models.Model):
-    numero = models.IntegerField()
+    numero = models.IntegerField(unique=True)
     precio = models.IntegerField()
     capacidad = models.IntegerField()
     tipo_habitacion = models.ForeignKey(TipoHabitacion, null=True, blank=True, on_delete=models.CASCADE)
-    hotel = models.OneToOneField(Hotel, null=True, blank=True, on_delete=models.CASCADE)
+    hotel = models.ForeignKey(Hotel, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.numero)
@@ -87,7 +87,7 @@ class Reserva(models.Model):
     fecha_salida = models.DateTimeField(auto_now=False)
     huesped = models.ForeignKey(Huesped, null=True, blank=True, on_delete=models.CASCADE)
     habitacion = models.ForeignKey(Habitacion, null=True, blank=True, on_delete=models.CASCADE)
-    estado = models.OneToOneField(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
+    estado = models.ForeignKey(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.huesped)
