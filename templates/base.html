@@ -1,3 +1,4 @@
+<!-- se cragan los archivos staticos -->
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +11,21 @@
   <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 </head>
 <body>
+  <!-- hereda el navbar -->
   {% include "share/navbar.html" %}
+
+  <!-- contenido de la web -->
+  <div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-11">
+        {% block content%}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  <!-- fin del contenido -->
+
+  <!-- hereda el footer -->
   {% include "share/footer.html" %}
   <script src="{% static 'js/jquery.min.js' %}" charset="utf-8"></script>
   <script src="{% static 'js/popper.min.js' %}" charset="utf-8"></script>
