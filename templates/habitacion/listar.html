@@ -5,13 +5,18 @@
 {% block content%}
   <div class="row">
     <div class="col-3">
-      Seccion destinada a filtros de busqueda        
+      <form method="GET" action="/buscar">
+        <div class="form-group">
+          <input type="text" placeholder="Nombre hotel" name="nombre" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-info" value="Buscar">
+      </form>
     </div>
     <div class="col-9">
       <div class="row">
         {% for habitacion in habitaciones %}
           <div class="col-4">
-            <div class="card mb-3">
+            <div class="card card-hover mb-3">
               <img class="card-img-top" src="https://media.staticontent.com/media/pictures/10436860-a22a-48d5-8fb0-05d195f73c68/323x250" alt="">
               <div class="card-body">
                 <h5 class="card-title text-capitalize">

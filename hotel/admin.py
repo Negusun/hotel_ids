@@ -12,6 +12,8 @@ from .models import EstadoReserva
 from .models import Reserva
 
 admin.site.register([
+        Pais,
+        Ciudad,
         Hotel,
         TipoHabitacion,
         Habitacion,
