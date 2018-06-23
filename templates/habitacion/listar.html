@@ -1,0 +1,31 @@
+<!-- se extiende el layout base -->
+{% extends "base.html" %}
+
+<!-- se define el block con el contenido a mostrar -->
+{% block content%}
+  {% for habitacion in habitaciones %}
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title text-capitalize">
+        {{habitacion.hotel.nombre}} {{habitacion.hotel.categoria}} Estrella
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        Habitacion: {{habitacion.numero}}
+      </h6>
+      <p class="card-text">
+        Ubicación: <span class="text-capitalize">
+          {{habitacion.hotel.ubicacion}}, {{habitacion.hotel.ciudad}}
+        </span><br>
+        Tipo: <span class="text-capitalize">
+          {{habitacion.tipo_habitacion}}
+        </span>
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      $ {{habitacion.precio}}
+      {{habitacion.capacidad}}
+      <a href="#" class="btn btn-info btn-sm float-right">Reservar</a>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
