@@ -87,7 +87,7 @@ class Reserva(models.Model):
     fecha_salida = models.DateTimeField(auto_now=False)
     huesped = models.ForeignKey(Huesped, null=True, blank=True, on_delete=models.CASCADE)
     habitacion = models.ForeignKey(Habitacion, null=True, blank=True, on_delete=models.CASCADE)
-    estado = models.ForeignKey(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
+    estado = models.OneToOneField(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.huesped)
