@@ -7,15 +7,25 @@
     <div class="col-3">
       <form method="GET" action="/buscar">
 
-        <div class="form-group">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="dollar-addon1">$ Minimo</span>
+          </div>
           <input type="number"
+            aria-describedby="dollar-addon"
+            aria-label="Default" aria-describedby="inputGroup-sizing-default"
             placeholder="Precio minimo"
             name="precio_min"
             class="form-control"
             min="10000" max="100000" value="{{precio_min}}">
         </div>
-        <div class="form-group">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="dollar-addon">$ Maximo</span>
+          </div>
           <input type="number"
+            aria-describedby="dollar-addon"
+            aria-label="Default" aria-describedby="inputGroup-sizing-default"
             placeholder="Precio maximo"
             name="precio_max"
             class="form-control"
