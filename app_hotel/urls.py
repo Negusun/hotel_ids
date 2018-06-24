@@ -20,7 +20,6 @@ from hotel import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.inicio, name='inicio'),
-    path('habitaciones/', views.habitaciones, name='habitaciones'),
-    path('buscar', views.buscar, name='buscar'),
+    path('', views.buscar, name='buscar'),
+    path('buscar', views.buscar, name='buscar')
 ]

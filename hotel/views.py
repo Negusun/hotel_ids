@@ -7,35 +7,39 @@ import json
 
 # Create your views here.
 def buscar(request):
-    nombre = request.GET.get('nombre') #diccionario
-    hoteles = Hotel.objects.filter(nombre__startswith=nombre)
-    hoteles = [ hotel_serializer(hotel) for hotel in hoteles ]
+    precio_min = request.GET.get('precio_min') #diccionario
+    precio_max = request.GET.get('precio_max') #diccionario
 
-    return HttpResponse(json.dumps(hoteles), content_type='application/json')
+    if not precio_min:
+        precio_min = 10000
 
-def hotel_serializer(hotel):
+    if not precio_max:
+        precio_max = 100000
 
-    return {
-        'nombre': hotel.nombre,
-        'nombre': hotel.nombre,
-        'ubicacion': hotel.ubicacion,
-        'categoria': hotel.categoria
-    }
+    habitaciones = Habitacion.objects.filter(precio__range=(precio_min, precio_max)).order_by('precio')
 
-def inicio(request):
-    ciudades = Ciudad.objects.all()
-    paises = Pais.objects.all()
-    context = {
-        'title' : 'Inicio',
-        'ciudades' : ciudades,
-        'paises' : paises
-    }
-    return render(request, 'inicio.html', context)
-
-def habitaciones(request):
-    habitaciones = Habitacion.objects.all().order_by('precio', 'hotel')
     context = {
         'title' : 'Habitaciones',
-        'habitaciones' : habitaciones
+        'habitaciones' : habitaciones,
+        'precio_min': precio_min,
+        'precio_max': precio_max
     }
     return render(request, 'habitacion/listar.html', context)
+
+# def inicio(request):
+#     ciudades = Ciudad.objects.all()
+#     paises = Pais.objects.all()
+#     context = {
+#         'title' : 'Inicio',
+#         'ciudades' : ciudades,
+#         'paises' : paises
+#     }
+#     return render(request, 'inicio.html', context)
+
+# def habitaciones(request):
+#     habitaciones = Habitacion.objects.all().order_by('precio', 'hotel')
+#     context = {
+#         'title' : 'Habitaciones',
+#         'habitaciones' : habitaciones
+#     }
+#     return render(request, 'habitacion/listar.html', context)
