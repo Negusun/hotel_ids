@@ -9,6 +9,19 @@
 
         <div class="form-group input-group">
           <div class="input-group-prepend">
+            <span class="input-group-text" id="ciudad">Ciudad</span>
+          </div>
+          <select aria-describedby="ciudad" name="ciudad"
+            aria-label="Default" aria-describedby="inputGroup-sizing-default"
+            class="form-control">
+              {% for ciudad in ciudades %}
+                <option value="{{ciudad.id}}">{{ciudad.nombre}}</option>
+              {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
             <span class="input-group-text" id="dollar-addon1">$ Minimo</span>
           </div>
           <input type="number"
