@@ -4,10 +4,8 @@
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
     <div class="col-3">
-      {% for f in habitaciones_id %}
-        {{f.habitacion}}
-      {% endfor %}
-      <form method="GET" action="/buscar" class="card p-3 card-buscar">
+      <form method="GET" action="/buscar" class="card p-2 pt-3 pb-3 card-buscar">
+        <h4 class="mb-3 text-center text-capitalize ">Encuentra tu habitacion ideal</h4>
         <div class="form-group input-group">
           <div class="input-prepend">
             <span class="input-group-text">

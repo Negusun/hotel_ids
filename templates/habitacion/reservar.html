@@ -3,18 +3,153 @@
 
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
-  {% if habitacion %}
-    {{habitacion.hotel.nombre}}
-    {{habitacion.hotel.categoria}}
-    Habitacion: {{habitacion.numero}}
-    {{habitacion.tipo_habitacion}}
-    {{habitacion.hotel.ubicacion}}
-    {{habitacion.hotel.ciudad}}
-    {{habitacion.precio}}
-    {{habitacion.capacidad}}
+  {% if info %}
+  <div class="row justify-content">
+    <h1> {{info}} <strong><i class="far fa-check-circle"></i></strong></h1>
+  </div>
   {% else %}
-    <div class="row justify-content">
-      <h3 class=""> Lo sentimos no se encontro la habitacion. <i class="fas fa-search"></i></h3>
+    {% if habitacion %}
+    <div class="row justify-content-center align-items-center">
+      <div class="card-mod p-5 col-6">
+        <p>Valoración hotel: <i class="fas fa-star star">{{habitacion.hotel.categoria}}</i></p>
+        <h3 class=" text-capitalize">
+          hotel: {{habitacion.hotel.nombre}}
+        </h3>
+        <h6>
+          Habitacion numero: {{habitacion.numero}}
+        </h6>
+
+        <ul>
+          <li>
+            Tipo Habitacion: <span class="text-capitalize">
+              {{habitacion.tipo_habitacion}}
+            </span>
+          </li>
+          <li>
+            <i class="fas fa-map-marked"></i> Ubicacion: <span class="text-capitalize">
+              {{habitacion.hotel.ubicacion}}, {{habitacion.hotel.ciudad}}
+            </span>
+          </li>
+          <li>
+            Precio por noche: <i class="fas fa-dollar-sign"></i> {{habitacion.precio}}
+          </li>
+          <li>
+            Capacidad maxima: {{habitacion.capacidad}} <i class="fas fa-users"></i>
+          </li>
+        </ul>
+      </div>
+
+      <form class="col-6 card card-buscar" method="POST" action="">
+        {% csrf_token %}
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-6">
+              <label>Fecha reserva</label>
+              <div class="input-group">
+                <div class="input-prepend">
+                  <span class="input-group-text">
+                    <span class="input-prepend">
+                      <span class="add-on">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <input class="form-control no-border" type="text" name="fechas"/>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <label>Fecha nacimiento</label>
+              <div class="input-group">
+                <div class="input-prepend">
+                  <span class="input-group-text">
+                    <span class="input-prepend">
+                      <span class="add-on">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+                <input type="text" class="form-control no-border" name="fecha_nacimiento" value="10/24/1984">
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group input-group">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="fas fa-id-card-alt"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="text" class="form-control no-border" name="ci" placeholder="ID / Pasaporte">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="far fa-user"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="text" class="form-control no-border" name="nombre" placeholder="Nombre">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="far fa-user"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="text" class="form-control no-border" name="apellido_pat" placeholder="Apellido paterno">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="far fa-user"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="text" class="form-control no-border" name="apellido_mat" placeholder="Apellido materno">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="fas fa-mobile-alt"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="tel" class="form-control no-border" name="telefono" placeholder="Telefono">
+            <div class="input-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="far fa-envelope-open"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="email" class="form-control no-border" name="email" placeholder="Correo">
+          </div>
+          <input type="submit" class="btn btn-info float-right" value="Reservar">
+        </div>
+      </form>
     </div>
+    {% else %}
+      <div class="row justify-content">
+        <h1 class=""> Lo sentimos no se encontro la habitacion. <i class="fas fa-search"></i></h1>
+      </div>
+    {% endif %}
   {% endif %}
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from hotel.models import Habitacion, Ciudad, Pais, Hotel, Reserva
+from django.core.exceptions import *
 
 from datetime import date, datetime
 from django.http import HttpResponse
@@ -8,8 +9,21 @@ import json
 
 # Reserva
 def reservar(request, id):
-    habitacion = Habitacion.objects.get(id=id)
-    return render(request, 'habitacion/reservar.html', {'habitacion': habitacion})
+    try:
+        habitacion = Habitacion.objects.get(id=id)
+        if(False):
+            info = 'Habitacion reservada gracias por preferirnos'
+        else:
+            info = None
+    except:
+        habitacion = None
+        info = None
+
+    context = {
+        'habitacion': habitacion,
+        'info': info
+    }
+    return render(request, 'habitacion/reservar.html', context)
 
 # Buscador
 def buscar(request):

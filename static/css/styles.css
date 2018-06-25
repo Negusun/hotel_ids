@@ -22,8 +22,16 @@
 .input-group-text {
   background-color: #fff !important;
   border: none !important;
+  border-radius: 0 !important;
 }
 
 .no-border {
   border: none !important;
+}
+
+.card-mod {
+  border-right: none;
+  background-color: #31a2b8;
+  min-height: 100%;
+  color: white;
 }
