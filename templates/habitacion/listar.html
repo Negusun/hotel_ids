@@ -4,7 +4,7 @@
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
     <div class="col-3">
-      <form method="GET" action="/buscar">
+      <form method="GET" action="/buscar" class="card p-3 card-buscar">
         <div class="form-group input-group">
           <div class="input-prepend">
             <span class="input-group-text">
@@ -15,7 +15,7 @@
               </span>
             </span>
           </div>
-          <input class="form-control" type="text" name="fechas" />
+          <input class="form-control no-border" type="text" name="fechas" />
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
@@ -29,7 +29,7 @@
           </div>
           <select name="ciudad"
             aria-label="Default" aria-describedby="inputGroup-sizing-default"
-            class="form-control">
+            class="form-control no-border">
               {% for ciudad in ciudades %}
                 <option value="{{ciudad.id}}">{{ciudad.nombre}}</option>
               {% endfor %}
@@ -52,7 +52,7 @@
               aria-label="Default" aria-describedby="inputGroup-sizing-default"
               placeholder="Precio minimo"
               name="precio_min"
-              class="form-control"
+              class="form-control no-border"
               min="10000" max="100000" value="{{precio_min}}">
 
             <div class="input-group-prepend">
@@ -68,12 +68,14 @@
               aria-label="Default" aria-describedby="inputGroup-sizing-default"
               placeholder="Precio maximo"
               name="precio_max"
-              class="form-control"
+              class="form-control no-border"
               min="10000" max="100000" value="{{ precio_max }}">
           </div>
         </div>
 
-        <input type="submit" class="btn btn-info" value="Buscar">
+        <button class="btn btn-info">
+          <i class="fas fa-search"></i> Buscar
+        </button>
       </form>
     </div>
     <div class="col-9">
@@ -108,7 +110,12 @@
             </div>
           {% endfor %}
         {% else %}
-          <h3>No se encontraron habitaciones disponibles</h3>
+        <div class="col-12">
+          <div class="row justify-content-center">
+            <h3 class=""> Lo sentimos no se encontraron habitaciones disponibles.</h3>
+            <h3>Pruebe nuevamente con otra busqueda <i class="fas fa-search"></i></h3>
+          </div>
+        </div>
         {% endif %}
       </div>
     </div>

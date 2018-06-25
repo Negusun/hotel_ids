@@ -18,3 +18,12 @@
   background-color: #ffe066;
   border-radius: 0;
 }
+
+.input-group-text {
+  background-color: #fff !important;
+  border: none !important;
+}
+
+.no-border {
+  border: none !important;
+}
