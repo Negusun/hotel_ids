@@ -9,7 +9,7 @@ $(document).ready(function() {
       "applyButtonClasses": "btn-info",
       "cancelClass": "btn-danger",
       "locale": {
-        "format": "MM/DD/YYYY",
+        "format": "YYYY/MM/DD",
         "separator": " - ",
         "applyLabel": "Aceptar",
         "cancelLabel": "Cancelar",

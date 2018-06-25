@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from hotel.models import Habitacion, Ciudad, Pais, Hotel
+from hotel.models import Habitacion, Ciudad, Pais, Hotel, Reserva
 
+from datetime import date, datetime
 from django.http import HttpResponse
 from django.core import serializers
 import json
@@ -10,21 +11,40 @@ def buscar(request):
     precio_min = request.GET.get('precio_min')
     precio_max = request.GET.get('precio_max')
     ciudad = request.GET.get('ciudad')
+    fechas = request.GET.get('fechas')
 
+    # definir fecha actual para ser usadas en caso que no llegue una por parametro
+    f_entrada = date.today()
+    f_salida = date.today()
+
+    # seleccionar todas las habitaciones a las que se les aplicaran filtros
+    habitaciones = Habitacion.objects.all()
+
+    # si llegan fechas por parametro formatearlas
+    if fechas:
+        fechas = fechas.split(' - ')
+        f_entrada = datetime.strptime(fechas[0], "%Y/%m/%d").date()
+        f_salida = datetime.strptime(fechas[1], "%Y/%m/%d").date()
+
+    # validar que siempre hayan filtros de precios
     if not precio_min:
         precio_min = 10000
-
     if not precio_max:
         precio_max = 100000
 
+    # aplicar filtros a habitaciones segun ciudad
     if ciudad:
         hoteles_id = Hotel.objects.filter(ciudad=ciudad)
-        habitaciones = Habitacion.objects.filter(hotel__in=hoteles_id).filter(precio__range=(precio_min, precio_max)).order_by('precio')
+        habitaciones = habitaciones.filter(hotel__in=hoteles_id).filter(precio__range=(precio_min, precio_max)).order_by('precio')
     if not ciudad:
-        habitaciones = Habitacion.objects.filter(precio__range=(precio_min, precio_max)).order_by('precio')
+        habitaciones = habitaciones.filter(precio__range=(precio_min, precio_max)).order_by('precio')
 
+    # filtro para excluir habitaciones por rango de fechas reservadas
+    habitaciones_id = Reserva.objects.filter(fecha_ingreso__range=[f_entrada, f_salida]).filter(fecha_salida__range=[f_entrada, f_salida])
+    habitaciones = habitaciones.exclude(reserva__in=habitaciones_id)
+
+    # ciudades disponibles
     ciudades = Ciudad.objects.all()
-
 
     context = {
         'title' : 'Habitaciones',

@@ -52,23 +52,23 @@ class Habitacion(models.Model):
 
 #Huesped model
 class Huesped(models.Model):
-    ci = models.CharField(max_length=15)
+    ci = models.CharField(max_length=20)
     email = models.CharField(max_length=150)
     nombre = models.CharField(max_length=60)
     apellido_pat = models.CharField(max_length=60)
     apellido_mat = models.CharField(max_length=60)
     telefono = models.IntegerField()
-    fecha_nacimiento = models.DateTimeField(auto_now=False)
+    fecha_nacimiento = models.DateField(auto_now=False)
 
     def __str__(self):
         return str(self.nombre)
 
 #Acompanante model
 class Acompanante(models.Model):
-    ci = models.CharField(max_length=15)
+    ci = models.CharField(max_length=20)
     nombre = models.CharField(max_length=60)
     apellido_pat = models.CharField(max_length=60)
-    fecha_nacimiento = models.DateTimeField(auto_now=False)
+    fecha_nacimiento = models.DateField(auto_now=False)
     huesped = models.ForeignKey(Huesped, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -83,8 +83,8 @@ class EstadoReserva(models.Model):
 
 #Reserva model
 class Reserva(models.Model):
-    fecha_ingreso = models.DateTimeField(auto_now=False)
-    fecha_salida = models.DateTimeField(auto_now=False)
+    fecha_ingreso = models.DateField(auto_now=False)
+    fecha_salida = models.DateField(auto_now=False)
     huesped = models.ForeignKey(Huesped, null=True, blank=True, on_delete=models.CASCADE)
     habitacion = models.ForeignKey(Habitacion, null=True, blank=True, on_delete=models.CASCADE)
     estado = models.ForeignKey(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
