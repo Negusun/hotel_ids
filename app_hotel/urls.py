@@ -21,5 +21,6 @@ from hotel import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.buscar, name='buscar'),
-    path('buscar', views.buscar, name='buscar')
+    path('buscar', views.buscar, name='buscar'),
+    path('reservar/<int:id>/', views.reservar, name='reservar')
 ]

@@ -1,0 +1,20 @@
+<!-- se extiende el layout base -->
+{% extends "base.html" %}
+
+<!-- se define el block con el contenido a mostrar -->
+{% block content%}
+  {% if habitacion %}
+    {{habitacion.hotel.nombre}}
+    {{habitacion.hotel.categoria}}
+    Habitacion: {{habitacion.numero}}
+    {{habitacion.tipo_habitacion}}
+    {{habitacion.hotel.ubicacion}}
+    {{habitacion.hotel.ciudad}}
+    {{habitacion.precio}}
+    {{habitacion.capacidad}}
+  {% else %}
+    <div class="row justify-content">
+      <h3 class=""> Lo sentimos no se encontro la habitacion. <i class="fas fa-search"></i></h3>
+    </div>
+  {% endif %}
+{% endblock %}

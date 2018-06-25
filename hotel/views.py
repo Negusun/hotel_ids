@@ -6,7 +6,12 @@ from django.http import HttpResponse
 from django.core import serializers
 import json
 
-# Create your views here.
+# Reserva
+def reservar(request, id):
+    habitacion = Habitacion.objects.get(id=id)
+    return render(request, 'habitacion/reservar.html', {'habitacion': habitacion})
+
+# Buscador
 def buscar(request):
     precio_min = request.GET.get('precio_min')
     precio_max = request.GET.get('precio_max')
