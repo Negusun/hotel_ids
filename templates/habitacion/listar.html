@@ -6,12 +6,29 @@
   <div class="row">
     <div class="col-3">
       <form method="GET" action="/buscar">
-
+        <div class="form-group input-group">
+          <div class="input-prepend">
+            <span class="input-group-text">
+              <span class="input-prepend">
+                <span class="add-on">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </span>
+            </span>
+          </div>
+          <input class="form-control" type="text" name="fechas" />
+        </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="ciudad">Ciudad</span>
+            <span class="input-group-text">
+              <span class="input-prepend">
+                <span class="add-on">
+                  <i class="fas fa-globe-americas"></i>
+                </span>
+              </span>
+            </span>
           </div>
-          <select aria-describedby="ciudad" name="ciudad"
+          <select name="ciudad"
             aria-label="Default" aria-describedby="inputGroup-sizing-default"
             class="form-control">
               {% for ciudad in ciudades %}
@@ -20,29 +37,41 @@
           </select>
         </div>
 
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="dollar-addon1">$ Minimo</span>
+        <div class="form-group">
+          <label>Precios</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="fas fa-minus"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="number"
+              aria-label="Default" aria-describedby="inputGroup-sizing-default"
+              placeholder="Precio minimo"
+              name="precio_min"
+              class="form-control"
+              min="10000" max="100000" value="{{precio_min}}">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <span class="input-prepend">
+                  <span class="add-on">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <input type="number"
+              aria-label="Default" aria-describedby="inputGroup-sizing-default"
+              placeholder="Precio maximo"
+              name="precio_max"
+              class="form-control"
+              min="10000" max="100000" value="{{ precio_max }}">
           </div>
-          <input type="number"
-            aria-describedby="dollar-addon"
-            aria-label="Default" aria-describedby="inputGroup-sizing-default"
-            placeholder="Precio minimo"
-            name="precio_min"
-            class="form-control"
-            min="10000" max="100000" value="{{precio_min}}">
-        </div>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="dollar-addon">$ Maximo</span>
-          </div>
-          <input type="number"
-            aria-describedby="dollar-addon"
-            aria-label="Default" aria-describedby="inputGroup-sizing-default"
-            placeholder="Precio maximo"
-            name="precio_max"
-            class="form-control"
-            min="10000" max="100000" value="{{ precio_max }}">
         </div>
 
         <input type="submit" class="btn btn-info" value="Buscar">

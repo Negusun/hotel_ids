@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
     integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
 </head>
 <body>
   <!-- hereda el navbar -->
@@ -20,11 +21,11 @@
 
   <!-- contenido de la web -->
   <div class="container-fluid mt-5">
-    <div class="row justify-content-center">
-      <div class="col-11">
+    <div class="row justify-content-center pr-3 pl-3">
+
         {% block content%}
         {% endblock %}
-      </div>
+
     </div>
   </div>
   <!-- fin del contenido -->
@@ -34,5 +35,8 @@
   <script src="{% static 'js/jquery.min.js' %}" charset="utf-8"></script>
   <script src="{% static 'js/popper.min.js' %}" charset="utf-8"></script>
   <script src="{% static 'js/bootstrap.min.js' %}" charset="utf-8"></script>
+  <script src="{% static 'js/moment.js' %}" charset="utf-8"></script>
+  <script src="{% static 'js/datepicker.js' %}" charset="utf-8"></script>
+  <script src="{% static 'js/app.js' %}" charset="utf-8"></script>
 </body>
 </html>
