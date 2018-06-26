@@ -39,11 +39,13 @@
         </ul>
       </div>
 
-      <form class="col-6 card card-buscar" method="POST" action="">
+      <form class="col-6 card card-buscar ancho" method="POST" action="/reservar">
         {% csrf_token %}
+        <input type="hidden" name="habitacion_id" value="{{habitacion.id}}">
         <div class="card-body">
-          <div class="row">
-            <div class="form-group col-6">
+
+          <div class="form-row">
+            <div class="form-group col">
               <label>Fecha reserva</label>
               <div class="input-group">
                 <div class="input-prepend">
@@ -55,11 +57,11 @@
                     </span>
                   </span>
                 </div>
-                <input class="form-control no-border" type="text" name="fechas"/>
+                <input style="max-height: 36px;" class="form-control no-border" type="text" name="fechas"/>
               </div>
             </div>
 
-            <div class="form-group col-6">
+            <div class="col form-group">
               <label>Fecha nacimiento</label>
               <div class="input-group">
                 <div class="input-prepend">
@@ -71,78 +73,98 @@
                     </span>
                   </span>
                 </div>
-                <input type="text" class="form-control no-border" name="fecha_nacimiento" value="10/24/1984">
+                <input style="max-height: 36px;" type="text" class="form-control no-border" name="fecha_nacimiento" value="1992/02/16">
               </div>
             </div>
+          </div>
 
+          <div class="form-row">
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="fas fa-id-card-alt"></i>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <input style="max-height: 36px;" id="ci" type="text" class="form-control no-border" name="ci" placeholder="ID / Pasaporte">
+              <div id="ci_feed" class="text-center text-wrap"></div>
+            </div>
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="far fa-user"></i>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <input style="max-height: 36px;" id="nombre" type="text" class="form-control no-border" name="nombre" placeholder="Nombre">
+              <div id="nombre_feed" class="text-center text-wrap"></div>
+            </div>
           </div>
-          <div class="form-group input-group">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="fas fa-id-card-alt"></i>
+
+          <div class="form-row">
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="far fa-user"></i>
+                    </span>
                   </span>
                 </span>
-              </span>
+              </div>
+              <input style="max-height: 36px;" id="ap_pat" type="text" class="form-control no-border" name="apellido_pat" placeholder="Apellido paterno">
+              <div id="ap_pat_feed" class="text-center text-wrap"></div>
             </div>
-            <input type="text" class="form-control no-border" name="ci" placeholder="ID / Pasaporte">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="far fa-user"></i>
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="far fa-user"></i>
+                    </span>
                   </span>
                 </span>
-              </span>
+              </div>
+              <input style="max-height: 36px;" type="text" class="form-control no-border" name="apellido_mat" placeholder="Apellido materno">
             </div>
-            <input type="text" class="form-control no-border" name="nombre" placeholder="Nombre">
           </div>
-          <div class="form-group input-group">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="far fa-user"></i>
+
+          <div class="form-row">
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="fas fa-mobile-alt"></i>
+                    </span>
                   </span>
                 </span>
-              </span>
+              </div>
+              <input style="max-height: 36px;" type="number" id="tel" class="form-control no-border" name="telefono" placeholder="Telefono">
+              <div id="tel_feed" class="text-center text-wrap"></div>
             </div>
-            <input type="text" class="form-control no-border" name="apellido_pat" placeholder="Apellido paterno">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="far fa-user"></i>
+            <div class="col form-group input-group">
+              <div class="input-prepend">
+                <span class="input-group-text">
+                  <span class="input-prepend">
+                    <span class="add-on">
+                      <i class="far fa-envelope-open"></i>
+                    </span>
                   </span>
                 </span>
-              </span>
+              </div>
+              <input style="max-height: 36px;" id="email" type="email" class="form-control no-border" name="email" placeholder="Correo">
+              <div id="email_feed" class="text-center text-wrap"></div>
             </div>
-            <input type="text" class="form-control no-border" name="apellido_mat" placeholder="Apellido materno">
           </div>
-          <div class="form-group input-group">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="fas fa-mobile-alt"></i>
-                  </span>
-                </span>
-              </span>
-            </div>
-            <input type="tel" class="form-control no-border" name="telefono" placeholder="Telefono">
-            <div class="input-prepend">
-              <span class="input-group-text">
-                <span class="input-prepend">
-                  <span class="add-on">
-                    <i class="far fa-envelope-open"></i>
-                  </span>
-                </span>
-              </span>
-            </div>
-            <input type="email" class="form-control no-border" name="email" placeholder="Correo">
-          </div>
-          <input type="submit" class="btn btn-info float-right" value="Reservar">
+
+          <input type="submit" class="btn btn-info float-right" id="enviar" value="Reservar">
         </div>
       </form>
     </div>

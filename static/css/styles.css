@@ -35,3 +35,7 @@
   min-height: 100%;
   color: white;
 }
+
+.ancho {
+  max-width: 509px !important;
+}

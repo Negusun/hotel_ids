@@ -3,4 +3,7 @@
 
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
+  {% if info %}
+    <h1>{{info}}</h1>
+  {% endif %}
 {% endblock %}

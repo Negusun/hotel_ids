@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.buscar, name='buscar'),
     path('buscar', views.buscar, name='buscar'),
-    path('reservar/<int:id>/', views.reservar, name='reservar')
+    path('reservar/<int:id>/', views.reservar, name='reservar'),
+    path('reservar', views.addReserva, name='addReserva'),
 ]

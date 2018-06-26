@@ -3,27 +3,42 @@ from hotel.models import Habitacion, Ciudad, Pais, Hotel, Reserva
 from django.core.exceptions import *
 
 from datetime import date, datetime
-from django.http import HttpResponse
-from django.core import serializers
-import json
 
 # Reserva
 def reservar(request, id):
     try:
         habitacion = Habitacion.objects.get(id=id)
-        if(False):
-            info = 'Habitacion reservada gracias por preferirnos'
-        else:
-            info = None
     except:
         habitacion = None
-        info = None
 
     context = {
         'habitacion': habitacion,
-        'info': info
+        'title': 'Reservando'
     }
     return render(request, 'habitacion/reservar.html', context)
+
+def addReserva(request):
+    habitacion_id = request.POST.get('id')
+    fechas = request.POST.get('fechas')
+    fecha_nacimiento = request.POST.get('fecha_nacimiento')
+    ci = request.POST.get('ci')
+    nombre = request.POST.get('nombre')
+    apellido_pat = request.POST.get('apellido_pat')
+    apellido_mat = request.POST.get('apellido_mat')
+    telefono = request.POST.get('telefono')
+    email = request.POST.get('email')
+
+    info = None
+
+    if (habitacion_id and fecha_nacimiento and ci and nombre and apellido_pat and email and fechas):
+        fechas = fechas.split(' - ')
+        fecha_ingreso = datetime.strptime(fechas[0], "%Y/%m/%d").date()
+        fecha_salida = datetime.strptime(fechas[1], "%Y/%m/%d").date()
+        info = 'Tu reserva se proceso revisa tu Email con los datos e instrucciones.'
+    else:
+        info = 'No pudimos procesar tu reserva. \n Intenta con otra fecha o una habitacion diferente.'
+
+    return render(request, 'habitacion/res_reserva.html', {'info': info})
 
 # Buscador
 def buscar(request):
@@ -73,21 +88,3 @@ def buscar(request):
         'ciudades': ciudades
     }
     return render(request, 'habitacion/listar.html', context)
-
-# def inicio(request):
-#     ciudades = Ciudad.objects.all()
-#     paises = Pais.objects.all()
-#     context = {
-#         'title' : 'Inicio',
-#         'ciudades' : ciudades,
-#         'paises' : paises
-#     }
-#     return render(request, 'inicio.html', context)
-
-# def habitaciones(request):
-#     habitaciones = Habitacion.objects.all().order_by('precio', 'hotel')
-#     context = {
-#         'title' : 'Habitaciones',
-#         'habitaciones' : habitaciones
-#     }
-#     return render(request, 'habitacion/listar.html', context)
