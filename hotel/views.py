@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from hotel.models import Habitacion, Ciudad, Pais, Hotel, Reserva
+from hotel.models import Habitacion, Ciudad, Pais, Hotel, Reserva, Huesped, EstadoReserva
 from django.core.exceptions import *
 
 from datetime import date, datetime
@@ -30,13 +30,44 @@ def addReserva(request):
 
     info = None
 
-    if (habitacion_id and fecha_nacimiento and ci and nombre and apellido_pat and email and fechas):
+    if (habitacion_id or fecha_nacimiento or ci or nombre or apellido_pat or email or fechas):
         fechas = fechas.split(' - ')
         fecha_ingreso = datetime.strptime(fechas[0], "%Y/%m/%d").date()
         fecha_salida = datetime.strptime(fechas[1], "%Y/%m/%d").date()
-        info = 'Tu reserva se proceso revisa tu Email con los datos e instrucciones.'
+        fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y/%m/%d").date()
+
+        try:
+            reservada = Reserva.objects.filter(
+                    fecha_ingreso__range=[fecha_ingreso, fecha_salida]
+                ).filter(
+                    fecha_salida__range=[fecha_ingreso, fecha_salida]
+                ).filter(
+                    habitacion=habitacion_id
+                ).count()
+
+            if reservada <= 0:
+                reserva = Reserva.objects.create(
+                    fecha_ingreso = fecha_ingreso,
+                    fecha_salida = fecha_salida,
+                    huesped = Huesped.objects.create(
+                        ci = ci,
+                        email = email,
+                        nombre = nombre,
+                        apellido_pat = apellido_pat,
+                        apellido_mat = apellido_mat,
+                        telefono = telefono,
+                        fecha_nacimiento = fecha_nacimiento
+                    ),
+                    habitacion = Habitacion.objects.get(id=habitacion_id),
+                    estado = EstadoReserva.objects.get(descripcion='reservada')
+                )
+                info = 'Reserva realizada con exito gracias.'
+            else:
+                info = 'Esta habitacion esta reservada, prueba con una fecha diferente.'
+        except ValueError:
+            info = 'Error interno. '+ValueError
     else:
-        info = 'No pudimos procesar tu reserva. \n Intenta con otra fecha o una habitacion diferente.'
+        info = 'No pudimos procesar tu reserva. \n Faltan datos.'
 
     return render(request, 'habitacion/res_reserva.html', {'info': info})
 

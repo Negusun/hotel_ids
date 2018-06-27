@@ -41,7 +41,7 @@
 
       <form class="col-6 card card-buscar ancho" method="POST" action="/reservar">
         {% csrf_token %}
-        <input type="hidden" name="habitacion_id" value="{{habitacion.id}}">
+        <input type="hidden" name="id" value="{{habitacion.id}}">
         <div class="card-body">
 
           <div class="form-row">
