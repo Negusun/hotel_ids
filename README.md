@@ -5,4 +5,4 @@ Etapa de desarrollo para ingeniería en software
 - mysqlclient==1.3.12
 
 # Importante
-Duespues de ejecutar las migraciones cargar paises, ciudades y un TipoReserva = reservada a la BD.
+Duespues de ejecutar las migraciones cargar paises, ciudades y una descripcion = reservada en estado reserva a la BD.
