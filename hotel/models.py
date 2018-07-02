@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #pais model
 class Pais(models.Model):
@@ -88,6 +89,7 @@ class Reserva(models.Model):
     huesped = models.ForeignKey(Huesped, null=True, blank=True, on_delete=models.CASCADE)
     habitacion = models.ForeignKey(Habitacion, null=True, blank=True, on_delete=models.CASCADE)
     estado = models.ForeignKey(EstadoReserva, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.huesped)

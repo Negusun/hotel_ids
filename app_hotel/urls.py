@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include, reverse_lazy
 
 from hotel import views
 
@@ -23,5 +23,7 @@ urlpatterns = [
     path('', views.buscar, name='buscar'),
     path('buscar', views.buscar, name='buscar'),
     path('reservar/<int:id>/', views.reservar, name='reservar'),
+    path('reservas/usuario/<int:id>/', views.getReservas, name='getReservas'),
     path('reservar', views.addReserva, name='addReserva'),
+    path('accounts/', include('registration.backends.default.urls'))
 ]

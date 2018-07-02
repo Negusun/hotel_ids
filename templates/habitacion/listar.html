@@ -31,6 +31,7 @@
           <select name="ciudad"
             aria-label="Default" aria-describedby="inputGroup-sizing-default"
             class="form-control no-border">
+              <option value="">Todas las ciudades</option>
               {% for ciudad in ciudades %}
                 <option value="{{ciudad.id}}">{{ciudad.nombre}}</option>
               {% endfor %}
