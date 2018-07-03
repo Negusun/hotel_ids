@@ -23,13 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'okg9*soihc@_-!=q6o18be%4#0_pp6*agzj@h_7%%wnh942$i^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'stmp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'aterrizarstaff@gmail.com'
+EMAIL_HOST_PASSWORD = 'superinsegura1234'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
