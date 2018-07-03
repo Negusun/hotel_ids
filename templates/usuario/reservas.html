@@ -7,26 +7,64 @@
 <table class="table col-10">
   <thead>
     <tr>
-      <th>Num Hab.</th>
-      <th>Nombre Huesped</th>
-      <th>Fecha Ingreso</th>
-      <th>Fecha Salida</th>
+      <th>ID</th>
+      <th>Hab.</th>
+      <th>Hotel</th>
+      <th>Ubicación</th>
+      <th>Huesped</th>
+      <th>Ingreso</th>
+      <th>Salida</th>
       <th>Estado</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
   {% for reserva in reservas %}
         <tr>
-          <th>{{reserva.habitacion.numero}}</th>
+          <th>{{reserva.id}}</th>
+          <td>{{reserva.habitacion.numero}}</td>
+          <td class="text-capitalize">{{reserva.habitacion.hotel}}</td>
+          <td class="text-capitalize">{{reserva.habitacion.hotel.ciudad}}, {{reserva.habitacion.hotel.ciudad.pais}}</td>
           <td class="text-capitalize">{{reserva.huesped}}</td>
-          <td class="text-capitalize">{{reserva.fecha_ingreso}}</td>
-          <td class="text-capitalize">{{reserva.fecha_salida}}</td>
+          <td class="text-capitalize">{{reserva.fecha_ingreso|date:"d/m/y"}}</td>
+          <td class="text-capitalize">{{reserva.fecha_salida|date:"d/m/y"}}</td>
           <td class="text-capitalize">{{reserva.estado}}</td>
+          <td class="form-inline">
+            <form method="POST" action="/cancelar/confirm">
+              {% csrf_token %}
+              <input type="hidden" name="reserva" value="{{reserva.id}}">
+              <button type="submit" class="btn btn-danger btn-sm mr-2">
+                <i class="fas fa-trash-alt fa-xs"></i> Cancelar
+              </button>
+            </form>
+            <form>
+              <button type="submit" class="btn btn-info btn-sm">
+                <i class="fas fa-shopping-cart fa-xs"></i> Pagar
+              </button>
+            </form>
+          </td>
         </tr>
   {% endfor %}
 </tbody>
 </table>
 {% else %}
-  <h3>No tiene reservas</h3>
+  {% if confirm %}
+  <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Cancelar reserva!</h4>
+  <p>Estas seguro de querer cancelar la reserva con ID: {{confirm.id}}. <br>
+  Recuerda que una cancelación significa un <strong>Strike</strong>.</p>
+  <hr>
+  <div class="mb-0 form-inline">
+    <form class="mr-2" method="POST" action="/cancelar/reserva">
+      {% csrf_token %}
+      <input type="hidden" name="reserva_id" value="{{confirm.id}}">
+      <input type="submit" class="btn btn-danger btn-sm" value="Sí, estoy seguro">
+    </form>
+    <a class="btn btn-info btn-sm" href="/reservas">No, lo estoy</a>
+  </div>
+</div>
+  {% else %}
+    <h3>No tiene reservas</h3>
+  {% endif %}
 {% endif %}
 {% endblock %}
