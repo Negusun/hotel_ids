@@ -20,18 +20,6 @@ def getReservas(request):
     else:
         return HttpResponseRedirect(reverse('auth_login'))
 
-def cancelarReserva(request):
-    if(request.user.is_authenticated):
-        id = request.user.id
-        reservas = Reserva.objects.filter(user=id)
-        context = {
-            'reservas' : reservas,
-            'title' : 'Mis Reservas'
-        }
-        return render(request, 'usuario/reservas.html', context)
-    else:
-        return HttpResponseRedirect(reverse('auth_login'))
-
 # Reserva
 def reservar(request, id):
     if(request.user.is_authenticated):
