@@ -30,18 +30,20 @@
           <td class="text-capitalize">{{reserva.fecha_salida|date:"d/m/y"}}</td>
           <td class="text-capitalize">{{reserva.estado}}</td>
           <td class="form-inline">
-            <form method="POST" action="/cancelar/confirm">
-              {% csrf_token %}
-              <input type="hidden" name="reserva" value="{{reserva.id}}">
-              <button type="submit" class="btn btn-danger btn-sm mr-2">
-                <i class="fas fa-trash-alt fa-xs"></i> Cancelar
-              </button>
-            </form>
-            <form>
-              <button type="submit" class="btn btn-info btn-sm">
-                <i class="fas fa-shopping-cart fa-xs"></i> Pagar
-              </button>
-            </form>
+            {% if reserva.estado.descripcion != 'cancelada'%}
+              <form method="POST" action="/cancelar/confirm">
+                {% csrf_token %}
+                <input type="hidden" name="reserva" value="{{reserva.id}}">
+                <button type="submit" class="btn btn-danger btn-sm mr-2">
+                  <i class="fas fa-trash-alt fa-xs"></i> Cancelar
+                </button>
+              </form>
+              <form>
+                <button type="submit" class="btn btn-info btn-sm">
+                  <i class="fas fa-shopping-cart fa-xs"></i> Pagar
+                </button>
+              </form>
+            {% endif %}
           </td>
         </tr>
   {% endfor %}
