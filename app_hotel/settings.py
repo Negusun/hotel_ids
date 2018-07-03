@@ -25,7 +25,7 @@ SECRET_KEY = 'okg9*soihc@_-!=q6o18be%4#0_pp6*agzj@h_7%%wnh942$i^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aterrizar.herokuapp.com']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'aterrizarstaff@gmail.com'
