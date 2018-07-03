@@ -26,7 +26,7 @@ SECRET_KEY = config('APP_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS')
+ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
 
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': config('ENGINE'),
         'NAME': config('NAME'),
         'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
+        'PASSWORD': config('PASSWORD', default=''),
         'HOST': config('HOST'),
         'PORT': config('PORT', cast=int),
     }
