@@ -20,6 +20,29 @@ def getReservas(request):
     else:
         return HttpResponseRedirect(reverse('auth_login'))
 
+def cancelReserva(request):
+    if(request.user.is_authenticated):
+        try:
+            id = request.POST.get('reserva_id')
+            Reserva.objects.filter(id=id).update(estado=EstadoReserva.objects.get(descripcion='cancelada'))
+            return HttpResponseRedirect(reverse('getReservas'))
+        except:
+            return HttpResponseRedirect(reverse('getReservas'))
+    else:
+        return HttpResponseRedirect(reverse('auth_login'))
+
+def confirmCancel(request):
+    if(request.user.is_authenticated):
+        reserva_id = request.POST.get('reserva')
+        reserva = Reserva.objects.get(id=reserva_id, user=request.user.id)
+        context = {
+            'confirm': reserva,
+            'title' : 'Mis Reservas'
+        }
+        return render(request, 'usuario/reservas.html', context)
+    else:
+        return HttpResponseRedirect(reverse('auth_login'))
+
 # Reserva
 def reservar(request, id):
     if(request.user.is_authenticated):
