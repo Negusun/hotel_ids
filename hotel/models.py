@@ -42,7 +42,7 @@ class TipoHabitacion(models.Model):
 
 #habitacion model
 class Habitacion(models.Model):
-    numero = models.IntegerField(unique=True)
+    numero = models.IntegerField()
     precio = models.IntegerField()
     capacidad = models.IntegerField()
     tipo_habitacion = models.ForeignKey(TipoHabitacion, null=True, blank=True, on_delete=models.CASCADE)

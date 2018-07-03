@@ -8,8 +8,21 @@ from django.core.exceptions import *
 from datetime import date, datetime
 
 # # mis reservas
-def getReservas(request, id):
+def getReservas(request):
     if(request.user.is_authenticated):
+        id = request.user.id
+        reservas = Reserva.objects.filter(user=id)
+        context = {
+            'reservas' : reservas,
+            'title' : 'Mis Reservas'
+        }
+        return render(request, 'usuario/reservas.html', context)
+    else:
+        return HttpResponseRedirect(reverse('auth_login'))
+
+def cancelarReserva(request):
+    if(request.user.is_authenticated):
+        id = request.user.id
         reservas = Reserva.objects.filter(user=id)
         context = {
             'reservas' : reservas,
