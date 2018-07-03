@@ -87,6 +87,8 @@ def addReserva(request):
                         fecha_salida__range=[fecha_ingreso, fecha_salida]
                     ).filter(
                         habitacion=habitacion_id
+                    ).filter(
+                        estado=EstadoReserva.objects.get(descripcion='reservada')
                     ).count()
 
                 if reservada <= 0:
@@ -153,7 +155,13 @@ def buscar(request):
             habitaciones = habitaciones.filter(precio__range=(precio_min, precio_max)).order_by('precio')
 
         # filtro para excluir habitaciones por rango de fechas reservadas
-        habitaciones_id = Reserva.objects.filter(fecha_ingreso__range=[f_entrada, f_salida]).filter(fecha_salida__range=[f_entrada, f_salida])
+        habitaciones_id = Reserva.objects.filter(
+                fecha_ingreso__range=[f_entrada, f_salida]
+            ).filter(
+                fecha_salida__range=[f_entrada, f_salida]
+            ).filter(
+                estado=EstadoReserva.objects.get(descripcion='reservada')
+            )
         habitaciones = habitaciones.exclude(reserva__in=habitaciones_id)
 
         # ciudades disponibles
