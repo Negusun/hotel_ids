@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.buscar, name='buscar'),
     path('buscar', views.buscar, name='buscar'),
     path('reservar/<int:id>/', views.reservar, name='reservar'),
-    path('reservas/usuario/<int:id>/', views.getReservas, name='getReservas'),
+    path('reservas/', views.getReservas, name='getReservas'),
     path('reservar', views.addReserva, name='addReserva'),
     path('accounts/', include('registration.backends.default.urls'))
 ]

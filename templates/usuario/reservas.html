@@ -4,24 +4,24 @@
 <!-- se define el block con el contenido a mostrar -->
 {% block content%}
 {% if reservas %}
-<table class="table ml-3 mr-3">
+<table class="table col-10">
   <thead>
     <tr>
-      <th scope="col">Num Habitacion</th>
-      <th scope="col">Nombre Huesped</th>
-      <th scope="col">Fecha Ingreso</th>
-      <th scope="col">Fecha Salida</th>
-      <th scope="col">Estado</th>
+      <th>Num Hab.</th>
+      <th>Nombre Huesped</th>
+      <th>Fecha Ingreso</th>
+      <th>Fecha Salida</th>
+      <th>Estado</th>
     </tr>
   </thead>
   <tbody>
   {% for reserva in reservas %}
         <tr>
-          <th scope="row">{{reserva.habitacion.numero}}</th>
-          <td>{{reserva.huesped}}</td>
-          <td>{{reserva.fecha_ingreso}}</td>
-          <td>{{reserva.fecha_salida}}</td>
-          <td>{{reserva.estado}}</td>
+          <th>{{reserva.habitacion.numero}}</th>
+          <td class="text-capitalize">{{reserva.huesped}}</td>
+          <td class="text-capitalize">{{reserva.fecha_ingreso}}</td>
+          <td class="text-capitalize">{{reserva.fecha_salida}}</td>
+          <td class="text-capitalize">{{reserva.estado}}</td>
         </tr>
   {% endfor %}
 </tbody>
